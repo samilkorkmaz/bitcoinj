@@ -16,6 +16,9 @@
 
 package org.bitcoinj.examples;
 
+import java.io.BufferedReader; 
+import java.io.IOException; 
+import java.io.InputStreamReader; 
 import org.bitcoinj.core.*;
 import org.bitcoinj.kits.WalletAppKit;
 import org.bitcoinj.params.TestNet3Params;
@@ -85,6 +88,15 @@ public class Kit {
         // Ready to run. The kit syncs the blockchain and our wallet event listener gets notified when something happens.
         // To test everything we create and print a fresh receiving address. Send some coins to that address and see if everything works.
         System.out.println("send money to: " + kit.wallet().freshReceiveAddress().toString());
+        
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Press enter to exit.");
+        try {
+        	reader.readLine();
+        	System.out.println("Exited.");
+        } catch (IOException e) {
+        	System.out.println("IOExceptions");
+        }
 
         // Make sure to properly shut down all the running services when you manually want to stop the kit. The WalletAppKit registers a runtime ShutdownHook so we actually do not need to worry about that when our application is stopping.
         //System.out.println("shutting down again");
